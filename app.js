@@ -15,7 +15,11 @@ const port = process.env.PORT || 8000;
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: "https://food-rescue-hub-frontend.vercel.app", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true 
+}));
 // Express Session
 app.use(session({
     secret: process.env.SESSION_SECRET || 'fallback_secret_for_local',
@@ -48,3 +52,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(` Server running on port ${port}`);
 });
+module.exports = app;
